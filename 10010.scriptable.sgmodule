@@ -1,0 +1,10 @@
+#!name=10010toScriptable
+#!desc=Scriptable show 10010 data.
+#!system=ios
+
+[MITM]
+hostname = %APPEND% act.10010.com, m.client.10010.com
+
+[Script]
+10010.cookie.read = type=http-request,pattern=^http?:\/\/local.10010.com\/*,requires-body=1,max-size=0,script-path=10010.cookie.js
+10010.cookie.write = type=http-request,pattern=^https?:\/\/m.client.10010.com\/\/mobileserviceimportant\/home\/queryUserInfoSeven\/*,requires-body=1,max-size=0,script-path=10010.cookie.js

@@ -1,0 +1,12 @@
+#!name=10086toScriptable
+#!desc=Scriptable show 10086 data.
+#!system=ios
+
+[MITM]
+hostname = %APPEND% clientaccess.10086.cn
+
+[Script]
+10086.cookie.read = type=http-request,pattern=^http?:\/\/local.10086.com\/*,requires-body=1,max-size=0,script-path=10086.cookie.js
+10086.cookie.write.1 = type=http-request,pattern=^https:\/\/clientaccess.10086.cn\/SessionServer-orange\/checkIsValid,requires-body=1,max-size=0,script-path=10086.cookie.js
+10086.cookie.write.2 = type=http-request,pattern=^https:\/\/clientaccess.10086.cn\/biz-orange\/BN\/realFeeQuery\/getRealFee,requires-body=1,max-size=0,script-path=10086.cookie.js
+10086.cookie.write.3 = type=http-request,pattern=^https:\/\/clientaccess.10086.cn\/biz-orange\/BN\/newComboMealResouceUnite\/getNewComboMealResource,requires-body=1,max-size=0,script-path=10086.cookie.js
