@@ -3,8 +3,12 @@ session.url = $request.url;
 session.body = $request.body;
 session.headers = $request.headers;
 var key = ''
-if (/checkIsValid/.test(session.url)) {
+
+if (/autoLogin/.test(session.url)) {
     key = '10086_autologin';
+}
+else if (/checkIsValid/.test(session.url)) {
+    key = '10086_check';
 }
 else if (/getRealFee/.test(session.url)) {
     key = '10086_getfee';
@@ -16,9 +20,10 @@ else if (/local/.test(session.url)) {
     const res = {
         'autologin' : $persistentStore.read('10086_autologin'),
         'getfee' : $persistentStore.read('10086_getfee'),
-        'getnew' : $persistentStore.read('10086_getnew')
+        'getnew' : $persistentStore.read('10086_getnew'),
+        'check' : $persistentStore.read('10086_check')
     };
-    
+
     function getBaseDoneHeaders(mixHeaders = {}) {
         return Object.assign(
             {
@@ -28,15 +33,15 @@ else if (/local/.test(session.url)) {
             },
             mixHeaders)
     };
-    
+
     function getHtmlDoneHeaders() {
         return getBaseDoneHeaders({
             'Content-Type' : 'text/html;charset=UTF-8'
         })
     };
-    
+
     // $notification.post('Widget Refresh', '', 'get10086.js');
-    
+
     $done({response : {status : 200, header : getHtmlDoneHeaders(), body : JSON.stringify(res)}});
 }
 
