@@ -23,4 +23,4 @@ if (/local/.test($request.url)) {
 	$persistentStore.write(JSON.stringify($request.headers), '10010_header');
 	// $notification.post('联通Cookie', '刷新成功', '');
 }
-$done();
+$done({});
