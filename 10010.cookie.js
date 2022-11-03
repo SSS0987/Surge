@@ -21,6 +21,6 @@ if (/local/.test($request.url)) {
 } else {
 	$persistentStore.write($request.url, '10010_url');
 	$persistentStore.write(JSON.stringify($request.headers), '10010_header');
-	$notification.post('联通Cookie', '刷新成功', '');
+//	$notification.post('联通Cookie', '刷新成功', '');
 }
 $done({});
