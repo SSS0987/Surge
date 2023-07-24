@@ -19,8 +19,10 @@ if (/local/.test($request.url)) {
 	};
 	$done({response : {status : 200, header : getHtmlDoneHeaders(), body : JSON.stringify(res)}});
 } else {
-	$persistentStore.write($request.url, '10010_url');
-	$persistentStore.write(JSON.stringify($request.headers), '10010_header');
-//	$notification.post('联通Cookie', '刷新成功', '');
+	if (/ecs_token/.test(JSON.stringify($request.headers))) {
+		$persistentStore.write($request.url, '10010_url');
+		$persistentStore.write(JSON.stringify($request.headers), '10010_header');
+		// $notification.post('联通Cookie', '刷新成功', '');
+	}
 }
 $done({});
